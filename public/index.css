@@ -1,0 +1,42 @@
+body {
+    padding-top: 56px;
+}
+
+@media (max-width: 610px){
+    body {
+      padding-top: 96px;
+    }
+}
+
+@media (max-width: 391px){
+    body {
+      padding-top: 136px;
+    }
+}
+
+.jumbotron {
+    background-image: url("./trees.png");
+    text-align: center;
+    /* background-size: cover; */
+}
+
+.zoom {
+    padding: 20px;
+    transition: transform .2s; /* Animation */
+    width: 200px;
+    margin: 0 0;
+}
+  
+.zoom:hover {
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.shadow-lg:hover {
+    cursor: pointer;
+}
+
+.img-fluid {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
