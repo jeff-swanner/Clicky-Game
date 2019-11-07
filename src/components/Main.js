@@ -1,105 +1,125 @@
-import React, { Component } from "react";
+import React from "react";
+import Jumbotron from "./Jumbotron";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import Images from "./Images";
 
-class Main extends Component {
-  // Setting the initial values of this.state.username and this.state.password
-  state = {
-    username: "fuck",
-    password: ""
-  };
+var canidates = [
+    {
+      name: "biden",
+      source: "./biden.jpeg"
+    },
+    {
+      name: "booker",
+      source: "./booker.jpeg"
+    },
+    {
+      name: "bullock",
+      source: "./bullock.jpeg"
+    },
+    {
+      name: "buttigieg",
+      source: "./buttigieg.jpeg"
+    },
+    {
+      name: "castro",
+      source: "./castro.jpeg"
+    },
+    {
+      name: "delaney",
+      source: "./delaney.jpeg"
+    },
+    {
+      name: "harris",
+      source: "./harris.jpeg"
+    },
+    {
+      name: "o-rourke",
+      source: "./o-rourke.jpeg"
+    },
+    {
+      name: "sanders",
+      source: "./sanders.jpeg"
+    },
+    {
+      name: "steyer",
+      source: "./steyer.jpeg"
+    },
+    {
+      name: "warren",
+      source: "./warren.jpeg"
+    },
+    {
+      name: "yang",
+      source: "./yang.jpeg"
+    }
+]
 
-  handleInputChange = event => {
-    // Getting the value and name of the input which triggered the change
-    const value = event.target.value;
-    const name = event.target.name;
+var chosenArray = [];
 
-    // Updating the input's state
-    this.setState({
-      [name]: value
-    });
-  };
+var shuffle = array => {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+}
 
-  handleFormSubmit = event => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
-    event.preventDefault();
+class Main extends React.Component {
+    // Setting the initial state of the Counter component
+    state = {
+        currentScore: 0,
+        canidates,
+        topScore: 0
+    };
 
-    // Alert the user their first and last name, clear `this.state.firstName` and `this.state.lastName`, clearing the inputs
-    alert(`Hello ${this.state.username}. Your password is ${this.state.password}.`);
-    this.setState({
-      username: "",
-      password: ""
-    });
-  };
+    // handleIncrement increments this.state.count by 1
+    handleIncrement = (event) => {
+        event.preventDefault();
+        let chosen = event.target.getAttribute('alt');
+        if (chosenArray.includes(chosen)){
+            this.setState({ currentScore: 0 });
+            chosenArray =[];
+        } else {
+            this.setState({ currentScore: this.state.currentScore + 1 });
+            if (this.state.currentScore >= this.state.topScore) {
+                this.setState({ topScore: this.state.currentScore + 1 });
+            };
+            chosenArray.push(chosen);
+        };
+        this.setState({ canidates: shuffle(this.state.canidates)});
+        
+        // We always use the setState method to update a component's state
+        
+    };
 
-  handlePictureClick = event => {
-    event.preventDefault();
-    console.log('test')
-
-  }
-
-  render() {
-    return (
-      <div>
-        <nav class="navbar navbar-dark bg-info shadow fixed-top">
-          <span class="navbar-brand mb-0 h1">Clicky Game</span>
-          <span class="navbar-brand mb-0 h1">Click an Image to Begin!</span>
-          <span class="navbar-brand mb-0 h1">Score: 0 | Top Score: 0</span>
-        </nav>
-        <div class="jumbotron jumbotron-fluid shadow">
-          <div class="container">
-            <h1 class="display-4">Learn the Canidates!</h1>
-            <p class="lead">Click on an face to earn points, but don't click on any more than once!</p>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 zoom">
-              <img src="./biden.jpeg" class="img-fluid  p-1" alt="gamePic" onClick={this.handlePictureClick}></img>
+    render() {
+        return (
+            <div>
+                <Navbar 
+                    currentScore = {this.state.currentScore}
+                    topScore = {this.state.topScore}
+                />
+                <Jumbotron />
+                <Images 
+                  canidates = {this.state.canidates}
+                  handleIncrement = {this.handleIncrement}
+                />
+                <Footer />
             </div>
-            <div class="col-lg-3 zoom">
-              <img src="./booker.jpeg" class="img-fluid  p-1" alt="gamePic"></img>
-            </div>
-            <div class="col-lg-3 zoom">
-              <img src="./bullock.jpeg" class="img-fluid  p-1" alt="gamePic"></img>
-            </div>
-            <div class="col-lg-3 zoom">
-              <img src="./buttigieg.jpeg" class="img-fluid  p-1" alt="gamePic"></img>
-            </div>
-
-            <div class="col-lg-3 zoom">
-              <img src="./castro.jpeg" class="img-fluid  p-1" alt="gamePic"></img>
-            </div>
-            <div class="col-lg-3 zoom">
-              <img src="./delaney.jpeg" class="img-fluid  p-1" alt="gamePic"></img>
-            </div>
-            <div class="col-lg-3 zoom">
-              <img src="./harris.jpeg" class="img-fluid  p-1" alt="gamePic"></img>
-            </div>
-            <div class="col-lg-3 zoom">
-              <img src="./klobuchar.jpeg" class="img-fluid  p-1" alt="gamePic"></img>
-            </div>
-
-            <div class="col-lg-3 zoom">
-              <img src="./o-rourke.jpeg" class="img-fluid  p-1" alt="gamePic"></img>
-            </div>
-            <div class="col-lg-3 zoom">
-              <img src="./sanders.jpeg" class="img-fluid  p-1" alt="gamePic"></img>
-            </div>
-            <div class="col-lg-3 zoom">
-              <img src="./steyer.jpeg" class="img-fluid  p-1" alt="gamePic"></img>
-            </div>
-            <div class="col-lg-3 zoom">
-              <img src="./warren.jpeg" class="img-fluid  p-1" alt="gamePic"></img>
-            </div>
-          </div>
-        </div>
-        <footer class="page-footer font-small text-light bg-dark">
-          <div class="footer-copyright text-center py-3">Github Repo:
-            <a class="text-danger" href="https://github.com/jeff-swanner/clicky-game"> Click Here</a>
-          </div>
-        </footer>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 export default Main;
