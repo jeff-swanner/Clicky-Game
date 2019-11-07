@@ -14,6 +14,13 @@ body {
     }
 }
 
+@media (max-width: 391px){
+    .zoom {
+        padding: 0px;
+        width: 10px;
+    }
+}
+
 .jumbotron {
     background-image: url("./trees.png");
     text-align: center;
