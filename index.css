@@ -27,8 +27,6 @@ body {
 .zoom {
     padding: 20px;
     transition: transform .2s; /* Animation */
-    width: 200px;
-    margin: 0 0;
 }
   
 .zoom:hover {
