@@ -4,9 +4,10 @@ function Navbar(props) {
     return (
         <div className="container">
             <div className="row">
-                {props.canidates.map(canidate => (
-                    <div className="col-lg-3 zoom" key={canidate.name}>
-                        <img src={canidate.source} className="img-fluid  p-1" alt={canidate.name} onClick={props.handleIncrement}></img>
+                {/* Maps the canidates array to html */}
+                {props.finPics.map(pic => (
+                    <div className="col-lg-3 col-md-4 col-6 zoom" key={pic.name}>
+                        <img src={pic.source} className="img-fluid  p-1" alt={pic.name} onClick={props.gameLoop}></img>
                     </div>
                 ))}
             </div>
